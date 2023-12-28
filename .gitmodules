@@ -1,0 +1,6 @@
+[submodule "vendor/esx_core"]
+	path = vendor/esx_core
+	url = git@github.com:esx-framework/esx_core.git
+[submodule "vendor/cfx-server-data"]
+	path = vendor/cfx-server-data
+	url = git@github.com:citizenfx/cfx-server-data.git

@@ -1,0 +1,12 @@
+# secret
+secret.cfg
+
+# fivem cache
+db
+cache
+
+# build_res temp folder
+build_res.log
+resources/tmp
+
+.replxx_history

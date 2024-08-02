@@ -11,8 +11,6 @@
 # docker path type stuff
 
 log_file='build_res.log'
-res_dir='resources'
-tmp_dir="$res_dir/temp"
 
 log() {
     local timestamp=$(date +"%Y-%m-%d %H:%M:%S")
@@ -42,11 +40,15 @@ link_dir() {
     fi
 }
 
-log "build_res Dec 2023. install vMenu and oxmyqsl"
+log "build_res Aug 2024. install vMenu and oxmyqsl"
+
+res_dir='resources'
+tmp_dir="$res_dir/temp"
+lib_dir="$res_dir/[lib]"
 
 create_dir "$res_dir"
-create_dir "$res_dir/__temp__"
-create_dir "$res_dir/[lib]"
+create_dir "$tmp_dir"
+create_dir "$lib_dir"
 
 link_dir "../vendor/cfx-server-data/$res_dir" "$res_dir/[base]"
 link_dir "../vendor/esx_core/[core]" "$res_dir/[core]"
@@ -65,10 +67,12 @@ if [ -d "$res_dir/[lib]/oxmysql" ]; then
     log "[oxmysql] Found oxmysql folder skip"
 else
     log "[oxmysql] oxmysql not found download oxmysql-latest"
-    mkdir "$res_dir/[lib]/oxmysql"
+    mkdir "$lib_dir/oxmysql"
     wget --progress=bar:force -O "$tmp_dir/oxmysql.zip" "https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip" | log
-    unzip -o "$tmp_dir/oxmysql.zip" -d "$res_dir/[lib]" >> "$tmp_dir/oxmysql.zip_log"
+    unzip -o "$tmp_dir/oxmysql.zip" -d "$lib_dir" >> "$tmp_dir/oxmysql.zip_log"
     log $(cat "$tmp_dir/oxmysql.zip_log")
 fi
+
+rm -rf "$tmp_dir"
 
 log "Finished"
